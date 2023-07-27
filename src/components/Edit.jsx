@@ -1,62 +1,45 @@
 import { useState } from "react";
-
+import $ from "jquery";
 export default function Edit(info) {
     const [editObject, setEditObject] = useState({});
     const [input1, setInput1] = useState("");
     const [input2, setInput2] = useState("");
-    const [input3, setInput3] = useState();
+    const [input3, setInput3] = useState("");
     const [input4, setInput4] = useState("");
     const [input5, setInput5] = useState("");
-    const [input6, setInput6] = useState();
+    const [input6, setInput6] = useState("");
     const [input7, setInput7] = useState("");
-    const [input8, setInput8] = useState();
-    const [input9, setInput9] = useState();
-    const [input10, setInput10] = useState();
-    const [input11, setInput11] = useState();
-    async function postData() {
-        const jsonObj = new Object();
-        jsonObj.input1 = input1;
-        jsonObj.input2 = input2;
-        jsonObj.input3 = input3;
-        jsonObj.input4 = input4; 
-        jsonObj.input5 = input5;
-        jsonObj.input6 = input6;
-        jsonObj.input7 = input7;
-        jsonObj.input8 = input8;
-        jsonObj.input9 = input9;
-        jsonObj.input10 = input10;
-        jsonObj.input11 = input11;
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append('Access-Control-Allow-Origin', '*');
+    const [input8, setInput8] = useState("");
+    const [input9, setInput9] = useState("");
+    const [input10, setInput10] = useState("");
+    const [input11, setInput11] = useState("");
 
-        var raw = JSON.stringify({
-            "input1": input1,
-            "input2": input2,
-            "input3": input3,
-            "input4": input4,
-            "input5": input5,
-            "input6": input6,
-            "input7": input7,
-            "input8": input8,
-            "input9": input9,
-            "input10": input10,
-            "input11": input11
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("https://blo-backend.onrender.com/blo/", requestOptions)
-            .then(response => response.json())
-            .then(result => alert(result))
-            .catch(error => console.log('error', error));
+    function postData() {
+        var settings = {
+            "url": "https://blo-backend.onrender.com/blo/",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+              "input1": input1,
+              "input2": input2,
+              "input3": input3,
+              "input4": input4,
+              "input5": input5,
+              "input6": input6,
+              "input7": input7,
+              "input8": input8,
+              "input9": input9,
+              "input10": input10,
+              "input11": input11
+            }
+          };
+          $.ajax(settings).done(function (response) {
+            alert(response.message)
+          });
     }
-    console.log(editObject);
     return (
         <div className="edit-section">
             <h3 className="edit-heading">{info.heading}</h3>
